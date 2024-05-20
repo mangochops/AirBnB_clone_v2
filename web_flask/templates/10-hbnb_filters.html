@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HBNB</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/3-footer.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/3-header.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/4-common.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/6-filters.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo"></div>
+            <nav class="menu">
+                <ul>
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Contact</li>
+                </ul>
+            </nav>
+        </header>
+        <section class="filters">
+            <div class="popover">
+                <h3>States</h3>
+                <div class="scroll">
+                    {% for state in states %}
+                        <label class="popover-list">
+                            <input type="checkbox" name="states" value="{{ state.id }}"> {{ state.name }}
+                        </label>
+                    {% endfor %}
+                </div>
+                <h3>Amenities</h3>
+                <div class="scroll">
+                    {% for amenity in amenities %}
+                        <label class="popover-list">
+                            <input type="checkbox" name="amenities" value="{{ amenity.id }}"> {{ amenity.name }}
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <section class="places">
+            <article class="place">
+                <div class="title">
+                    <h2>Place 1</h2>
+                    <div class="price_by_night">
+                        $100
+                    </div>
+                </div>
+                <div class="information">
+                    <div class="max_guest">
+                        5 Guests
+                    </div>
+                    <div class="number_rooms">
+                        3 Bedrooms
+                    </div>
+                </div>
+                <div class="user">
+                    <p>Owner: John Doe</p>
+                </div>
+                <div class="description">
+                    Description of Place 1
+                </div>
+            </article>
+            <!-- More place articles here -->
+        </section>
+        <footer class="footer">
+            <p>Footer Content</p>
+        </footer>
+    </div>
+</body>
+</html>
