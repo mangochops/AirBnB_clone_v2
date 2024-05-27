@@ -33,12 +33,20 @@ class BaseModel:
         self.updated_at = datetime.now()
         storage.save()
 
-    def to_dict(self):
-        """Convert instance into dict format"""
-        dictionary = {}
-        dictionary.update(self.__dict__)
-        dictionary.update({'__class__':
-                          (str(type(self)).split('.')[-1]).split('\'')[0]})
-        dictionary['created_at'] = self.created_at.isoformat()
+    def to_dict(self, save_to_disk=False):
+    """Returns a dictionary representation of the BaseModel instance."""
+    # Get the dictionary representation of the instance
+    dict_rep = self.__dict__.copy()
+    # Remove the 'password' key if save_to_disk is False
+    if not save_to_disk and 'password' in dict_rep:
+        del dict_rep['password']
+    # Add the class name to the dictionary
+    dict_rep['__class__'] = self.__class__.__name__
+    # Convert datetime objects to string format
+    for key, value in dict_rep.items():
+        if isinstance(value, datetime):
+            dict_rep[key] = value.isoformat()
+    return dict_rep
+
         dictionary['updated_at'] = self.updated_at.isoformat()
         return dictionary
