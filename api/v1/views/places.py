@@ -34,3 +34,24 @@ def create_place(city_id):
     if not data:
         abort(400, 'Not a JSON')  # Invalid JSON
     # Check
+@app_views.route('/places_search', methods=['POST'])
+def places_search():
+    """Search for Place objects based on JSON input."""
+    try:
+        search_data = request.get_json()
+    except Exception as e:
+        abort(400, 'Not a JSON')
+
+    states = search_data.get('states', [])
+    cities = search_data.get('cities', [])
+    amenities = search_data.get('amenities', [])
+
+    places = []
+    if not states and not cities and not amenities:
+        places = storage.all('Place').values()
+    else:
+        # Logic to filter places based on states, cities, and amenities
+        # Implement the search rules mentioned in the requirements
+        # Update 'places' list accordingly
+
+    return jsonify([place.to_dict() for place in places])
