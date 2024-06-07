@@ -3,6 +3,11 @@ import shutil
 import uuid
 from flask import Flask, render_template
 
+@app.route('/1-hbnb/')
+def display_hbnb():
+    cache_id = uuid.uuid4()
+    return render_template('1-hbnb.html', cache_id=cache_id)
+
 # Directories and file paths
 src_static = 'web_flask/static'
 src_html = 'web_flask/templates/100-hbnb.html'
